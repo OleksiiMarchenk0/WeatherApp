@@ -22,8 +22,7 @@ Nauka organizacji pracy własnej I tworzenia dokumentacji
 
 Większe szansy na znalezienie nowej pracy lub na zostanie w obecnej 
 
-## Korzyści dla IT-Dev 
-
+[//]: <> (## Korzyści dla IT-Dev )
 # Motywacja 
 
 Potrzeba zbudowania portfolio 
@@ -38,7 +37,7 @@ Wersja DEMO – 3.10.2020
 
 # Lista funkcjonalności 
 
-##Jako meteopata  mogę sprawdzić pogodę dla konkretnego miasta, aby wiedzieć czy tam jechać  
+## Jako meteopata  mogę sprawdzić pogodę dla konkretnego miasta, aby wiedzieć czy tam jechać  
 
  Użytkownik może wpisywać nazwe miasta 
 
@@ -50,13 +49,13 @@ Nie przewiduje się możliwości wybierania miejscowości z mapy
 
 Mogę wprowadzić I zapisac ustawienia wyświetlania w zakresie: 
 
-/do sprawdzenia w specyfikacji Web-Api co nam wystawia 
+- do sprawdzenia w specyfikacji Web-Api co nam wystawia 
 
-Lokalizacja domyślna,  
+- Lokalizacja domyślna,  
 
-zakres pogody,  
+- zakres pogody,  
 
-jakie części pogody (temp, wiatr, zachmurzenie, opady, co wyświetlać a co nie), w jakich jednostkach, format wyświetlania danych (daty, liczb) 
+- jakie części pogody (temp, wiatr, zachmurzenie, opady, co wyświetlać a co nie), w jakich jednostkach, format wyświetlania danych (daty, liczb) 
 
  
 
