@@ -3,7 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "weather-icons/css/weather-icons.css";
 import "./App.css";
 import Weather from "./app_component/weather.component";
-import Form from "./app_component/form.component";
+import Form from "./app_component/input.town.form.component";
+import SavePropertiesForm from './app_component/save.properties.component';
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
       temp_min: undefined,
       description: "",
       error: false,
+      isSaveProperiesComponent:false
     };
     this.weatherIcon = {
       Thunderstorm: "wi-thunderstorm",
@@ -30,6 +32,7 @@ class App extends React.Component {
       Clouds: "wi-day-fog",
     };
   }
+
   getWeatherIcon(icon, rangeID) {
     switch (true) {
       /* Thunderstorm */
@@ -91,11 +94,24 @@ class App extends React.Component {
     let cell = Math.floor(temp - 273.15);
     return cell;
   }
+  handleShow = ()=>{
+      this.setState({
+        isSaveProperiesComponent: true
+      })
+  }
 
+  handleHide = () =>{
+      this.setState({
+        isSaveProperiesComponent: false
+      })
+  }
   render() {
     return (
       <div className="App">
         <Form loadWeather={this.getWeather} error={this.state.error} />
+        {this.state.isSaveProperiesComponent ? <SavePropertiesForm />: null }
+             <button onClick={this.handleShow}>Show</button>
+      
         <Weather
           city={this.state.city}
           country={this.state.country}
