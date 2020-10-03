@@ -2,22 +2,26 @@ import React, { Component } from "react";
 import "./save.properties.form.style.css";
 import { Switch } from "antd";
 class SavePropertiesForm extends Component {
-  sendData = () => {
-    const city = document.getElementById("cityInput").value;
-    const country = document.getElementById("countryInput").value;
-    const temperature = document.getElementById("temperatureInput").value;
-    const precipitation = document.getElementById("precipitationInput").value;
-    const settings = [city, country, temperature, precipitation];
-    this.props.trigger(settings);
-  };
   constructor(props) {
     super(props);
+    this.cityInput = React.createRef();
+    this.countryInput = React.createRef();
+    this.temperatureInput = React.createRef();
+    this.precipitationInput = React.createRef();
   }
   state = {
     city: '',
     country: '',
     temperature: false,
-    precipitation: false
+    precipitation: false,
+  };
+  sendData = () => {
+    const city = this.cityInput.current.value;
+    const country = this.countryInput.current.value;
+    const temperature = this.temperatureInput.current.value;
+    const precipitation = this.precipitationInput.current.value;
+    const settings = [city, country, temperature, precipitation];
+    this.props.trigger(settings);
   };
   handleChange = (event) => {
     const input = event.target;
@@ -46,7 +50,7 @@ class SavePropertiesForm extends Component {
         <label>
           City :
           <input
-            id="cityInput"
+            ref={this.cityInput}
             type="text"
             name="city"
             value={this.state.city}
@@ -57,7 +61,7 @@ class SavePropertiesForm extends Component {
         <label>
           Country :
           <input
-            id="countryInput"
+            ref={this.countryInput}
             type="text"
             name="country"
             value={this.state.country}
@@ -68,7 +72,7 @@ class SavePropertiesForm extends Component {
         <label>
           Temperature :{/* <Switch/> */}
           <input
-          id="temperatureInput"
+            ref={this.temperatureInput}
             type="checked"
             name="temperature"
             value={this.state.temperature}
@@ -78,7 +82,7 @@ class SavePropertiesForm extends Component {
         <label>
           Precipitation :
           <input
-          id="precipitationInput"
+            ref={this.precipitationInput}
             type="checked"
             name="precipitation"
             value={this.state.precipitation}

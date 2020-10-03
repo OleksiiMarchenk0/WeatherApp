@@ -3,12 +3,29 @@ import "./input.town.form.style.css";
 
 class Form extends React.Component {
   state = {
-    city: '',
-    country: '',
+    city: "",
+    country: "",
   };
   constructor(props) {
     super(props);
+    this.cityInput = React.createRef();
+    this.countryInput = React.createRef();
   }
+  getDataFromCache = () => {
+    let city = localStorage.getItem("city") || "";
+    let country = localStorage.getItem("country") || "";
+    let temperature = localStorage.getItem("temperature") || "";
+    let precipitation = localStorage.getItem("precipitation") || "";
+    let data = [city, country, temperature, precipitation];
+    return data;
+  };
+  fillFields = () => {
+    const cacheData = this.getDataFromCache();
+    const cityInput = this.cityInput.current;
+    const countryInput = this.countryInput.current;
+    cityInput.value = cacheData[0];
+    countryInput.value = cacheData[1];
+  };
   handleChange = (event) => {
     const input = event.target;
     const value = input.type === "checkbox" ? input.checked : input.value;
@@ -22,6 +39,7 @@ class Form extends React.Component {
           <div className="row">
             <div className="col-md-3 offset-md-2">
               <input
+                ref={this.cityInput}
                 type="text"
                 className="form-control"
                 name="city"
@@ -33,6 +51,7 @@ class Form extends React.Component {
             </div>
             <div className="col-md-3">
               <input
+                ref={this.countryInput}
                 type="text"
                 className="form-control"
                 name="country"
@@ -48,7 +67,7 @@ class Form extends React.Component {
           </div>
         </form>
         <div className="col-md-3 mt-md-0 text-md-left">
-          <button onClick={this.props.click} className="btn btn-warning">
+          <button onClick={this.fillFields} className="btn btn-warning">
             Use Default Parameters
           </button>
         </div>
@@ -56,13 +75,11 @@ class Form extends React.Component {
     );
   }
 }
-
 function error() {
   return (
-    <div className="alert alert-danger-mx-5" role="alert">
+    <div className="alert alert-danger mx-5" role="alert">
       Please enter values
     </div>
   );
 }
-
 export default Form;

@@ -11,7 +11,6 @@ const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
   getSettingsFunction = (settingsData) => {
-    console.log(settingsData);
     this.setState({
       city: settingsData[0],
       country: settingsData[1],
@@ -19,12 +18,11 @@ class App extends Component {
       precipitation: settingsData[3]
     });
   };
-
   constructor() {
     super();
     this.state = {
-      city: "",
-      country: "",
+      city: '',
+      country: '',
       icon: undefined,
       main: undefined,
       celsius: undefined,
@@ -42,11 +40,6 @@ class App extends Component {
       Atmosphere: "wi-fog",
       Clear: "wi-day-sunny",
       Clouds: "wi-day-fog",
-    };
-    this.setDefaultSettings = () => {
-      this.setState({
-        city: "Barcelona", // STATIC : Just for testing
-      });
     };
   }
 
@@ -116,7 +109,6 @@ class App extends Component {
       <div className="App">
         <CogButton CogCallback={this.getSettingsFunction} />
         <Form
-          click={this.callbackFunction}
           city={this.state.city}
           country={this.state.country}
           loadWeather={this.getWeather}
