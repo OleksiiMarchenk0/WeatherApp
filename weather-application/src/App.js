@@ -2,25 +2,26 @@ import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "weather-icons/css/weather-icons.css";
 import "./App.css";
-import Weather from "./app_component/weather.component";
-import Form from "./app_component/input.town.form.component";
-import SavePropertiesForm from './app_component/save.properties.component';
+import Weather from "./app_component/weather/weather.component.jsx";
+import Form from "./app_component/input.town.form/input.town.form.component.jsx";
+import CogButton from "./app_component/cog.button/cog.button.component";
+
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      city: undefined,
-      country: undefined,
+      city: "",
+      country: "",
       icon: undefined,
       main: undefined,
       celsius: undefined,
       temp_max: undefined,
       temp_min: undefined,
-      description: "",
+      description: '',
       error: false,
-      isSaveProperiesComponent:false
+      isSaveProperiesComponent: false,
     };
     this.weatherIcon = {
       Thunderstorm: "wi-thunderstorm",
@@ -30,6 +31,11 @@ class App extends React.Component {
       Atmosphere: "wi-fog",
       Clear: "wi-day-sunny",
       Clouds: "wi-day-fog",
+    };
+    this.setDefaultSettings = () => {
+      this.setState({
+        city: "Barcelona", // STATIC : Just for testing
+      });
     };
   }
 
@@ -94,24 +100,27 @@ class App extends React.Component {
     let cell = Math.floor(temp - 273.15);
     return cell;
   }
-  handleShow = ()=>{
-      this.setState({
-        isSaveProperiesComponent: true
-      })
-  }
-
-  handleHide = () =>{
-      this.setState({
-        isSaveProperiesComponent: false
-      })
-  }
+  handleShow = () => {
+    this.setState({
+      isSaveProperiesComponent: true,
+    });
+  };
+  handleHide = () => {
+    this.setState({
+      isSaveProperiesComponent: false,
+    });
+  };
   render() {
     return (
       <div className="App">
-        <Form loadWeather={this.getWeather} error={this.state.error} />
-        {this.state.isSaveProperiesComponent ? <SavePropertiesForm />: null }
-             <button onClick={this.handleShow}>Show</button>
-      
+        <CogButton />
+        <Form
+          click={this.setDefaultSettings}
+          city={this.state.city}
+          country={this.state.country}
+          loadWeather={this.getWeather}
+          error={this.state.error}
+        />
         <Weather
           city={this.state.city}
           country={this.state.country}
