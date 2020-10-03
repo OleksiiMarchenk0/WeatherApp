@@ -2,7 +2,8 @@ import React , {Component } from "react";
 import { FaCog } from "react-icons/fa";
 import SavePropertiesForm from '../save.poperties.form/save.properties.component.jsx';
 import "./cog.button.style.css";
-
+import"../../flaticon/flaticon.css";
+import {CSSTransition} from 'react-transition-group';
 export default class CogButton extends Component {
   sendData = (settingsData) => {
     //send data to cog.component
@@ -28,7 +29,8 @@ export default class CogButton extends Component {
       <div className="container">
           <div className="CogButtonContainer">
           <button className="CogButton" onClick={this.handleToggle}>
-          <FaCog />
+          {/* <FaCog /> */}
+          <i class="flaticon-gear"></i>
         </button>
           </div>
         {this.state.isSaveProperiesComponent ? <SavePropertiesForm trigger = {this.sendData}  />: null }

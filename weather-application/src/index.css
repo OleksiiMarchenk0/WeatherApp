@@ -5,11 +5,18 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  
+}
+#root{
+  min-height: 100vh;
   background: url('./assets/background.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+button:hover{
+  cursor: pointer;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

@@ -1,6 +1,6 @@
 import React from "react";
 import "./input.town.form.style.css";
-
+import LogError from "../log.error";
 class Form extends React.Component {
   state = {
     city: "",
@@ -34,7 +34,16 @@ class Form extends React.Component {
   render() {
     return (
       <div className="container">
-        <div>{this.props.error ? error() : null}</div>
+        <div>
+          <button onClick={this.fillFields} className="btn btn-warning">
+            Use Default Parameters
+          </button>
+        </div>
+        <div>
+          {this.props.error ? (
+            <LogError errMessage="Please enter values" />
+          ) : null}
+        </div>
         <form onSubmit={this.props.loadWeather}>
           <div className="row">
             <div className="col-md-3 offset-md-2">
@@ -66,20 +75,9 @@ class Form extends React.Component {
             </div>
           </div>
         </form>
-        <div className="col-md-3 mt-md-0 text-md-left">
-          <button onClick={this.fillFields} className="btn btn-warning">
-            Use Default Parameters
-          </button>
-        </div>
       </div>
     );
   }
 }
-function error() {
-  return (
-    <div className="alert alert-danger mx-5" role="alert">
-      Please enter values
-    </div>
-  );
-}
+
 export default Form;

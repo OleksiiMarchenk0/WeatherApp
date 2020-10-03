@@ -1,5 +1,9 @@
 .row{
     justify-content: center;
+    margin-bottom: 10px;
+}
+label{
+    margin-bottom: 0;
 }
 form{
     margin-top: 3rem; 
@@ -16,6 +20,8 @@ form{
  input:focus{
     background-color:transparent!important;
     box-shadow:none!important;
+    outline: none;
+    border-color: #ffc107;
 }
 .form-control:focus{
     border-color: #ffc107;

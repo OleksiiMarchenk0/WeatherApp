@@ -1,4 +1,4 @@
- /** Background image from https://www.pexels.com/photo/unrecognizable-couple-embracing-while-walking-on-pathway-near-mountains-4974917/ */
+/** Background image from https://www.pexels.com/photo/unrecognizable-couple-embracing-while-walking-on-pathway-near-mountains-4974917/ */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "weather-icons/css/weather-icons.css";
@@ -6,23 +6,24 @@ import "./App.css";
 import Weather from "./app_component/weather/weather.component.jsx";
 import Form from "./app_component/input.town.form/input.town.form.component.jsx";
 import CogButton from "./app_component/cog.button/cog.button.component";
-
+import LogError from "./app_component/log.error";
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
   getSettingsFunction = (settingsData) => {
+    console.log(settingsData);
     this.setState({
       city: settingsData[0],
       country: settingsData[1],
       temperature: settingsData[2],
-      precipitation: settingsData[3]
+      precipitation: settingsData[3],
     });
   };
   constructor() {
     super();
     this.state = {
-      city: '',
-      country: '',
+      city: "",
+      country: "",
       icon: undefined,
       main: undefined,
       celsius: undefined,
@@ -86,16 +87,24 @@ class App extends Component {
       const api_call = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`
       );
-      const response = await api_call.json();
-      this.setState({
-        error: false,
-        city: `${response.name} ,${response.sys.country}`,
-        celsius: this.calcCelsius(response.main.temp),
-        temp_max: this.calcCelsius(response.main.temp_max),
-        temp_min: this.calcCelsius(response.main.temp_min),
-        description: response.weather[0].description,
-      });
-      this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
+      try {
+        const response = await api_call.json();
+        console.log(response)
+        this.setState({
+          error: false,
+          city: `${response.name},${response.sys.country}`,
+          celsius: this.calcCelsius(response.main.temp),
+          temp_max: this.calcCelsius(response.main.temp_max),
+          temp_min: this.calcCelsius(response.main.temp_min),
+          description: response.weather[0].description,
+        });
+        this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
+      } catch {
+        console.log("err");
+        this.setState({
+          error: true,
+        });
+      }
     } else {
       this.setState({ error: true });
     }
@@ -107,13 +116,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CogButton CogCallback={this.getSettingsFunction} />
+      <div class="container">
+      <CogButton CogCallback={this.getSettingsFunction} />
         <Form
           city={this.state.city}
           country={this.state.country}
           loadWeather={this.getWeather}
           error={this.state.error}
         />
+        {this.state.error ? <LogError errMessage="City not found" /> : null}
         <Weather
           city={this.state.city}
           country={this.state.country}
@@ -123,6 +134,8 @@ class App extends Component {
           description={this.state.description}
           weathericon={this.state.icon}
         />
+      </div>
+        
       </div>
     );
   }

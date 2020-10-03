@@ -10,16 +10,25 @@ class SavePropertiesForm extends Component {
     this.precipitationInput = React.createRef();
   }
   state = {
-    city: '',
-    country: '',
+    city: "",
+    country: "",
     temperature: false,
     precipitation: false,
+  };
+  toggler = () => {
+    let newTemperature = !this.state.temperature;
+    this.setState(
+      {
+        temperature: newTemperature,
+      },
+      console.log(this.state.temperature)
+    );
   };
   sendData = () => {
     const city = this.cityInput.current.value;
     const country = this.countryInput.current.value;
-    const temperature = this.temperatureInput.current.value;
-    const precipitation = this.precipitationInput.current.value;
+    const temperature = this.state.temperature;
+    const precipitation = this.state.precipitation;
     const settings = [city, country, temperature, precipitation];
     this.props.trigger(settings);
   };
@@ -46,9 +55,13 @@ class SavePropertiesForm extends Component {
   }
   render() {
     return (
-      <form onSubmit={this.handleFormSubmit} className="card py-3 my-3">
-        <label>
-          City :
+      <form
+        onSubmit={this.handleFormSubmit}
+        className="card py-3 my-3 d-flex align-items-center alert alert-info"
+      >
+        <h3>Set default settings</h3>
+        <div className="row">
+          <label>City : </label>
           <input
             ref={this.cityInput}
             type="text"
@@ -57,9 +70,9 @@ class SavePropertiesForm extends Component {
             onChange={this.handleChange}
             placeholder="Default city"
           />
-        </label>
-        <label>
-          Country :
+        </div>
+        <div className="row">
+          <label>Country :</label>
           <input
             ref={this.countryInput}
             type="text"
@@ -68,27 +81,15 @@ class SavePropertiesForm extends Component {
             onChange={this.handleChange}
             placeholder="Default country"
           />
-        </label>
-        <label>
-          Temperature :{/* <Switch/> */}
-          <input
-            ref={this.temperatureInput}
-            type="checked"
-            name="temperature"
-            value={this.state.temperature}
-            onChange={this.handleChange}
-          />
-        </label>
-        <label>
-          Precipitation :
-          <input
-            ref={this.precipitationInput}
-            type="checked"
-            name="precipitation"
-            value={this.state.precipitation}
-            onChange={this.handleChange}
-          />
-        </label>
+        </div>
+        <div className="row">
+          <label>Temperature :</label>
+          <Switch enabled onClick={this.toggler} />
+        </div>
+        <div className="row">
+          <label> Precipitation : </label>
+          <Switch onClick={this.toggler} />
+        </div>
         <button className="btn btn-warning" type="submit">
           Save
         </button>
