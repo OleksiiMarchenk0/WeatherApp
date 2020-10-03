@@ -1,15 +1,23 @@
 import React, { Component } from "react";
 import "./save.properties.form.style.css";
 import { Switch } from "antd";
-  class SavePropertiesForm extends Component {
+class SavePropertiesForm extends Component {
+  sendData = () => {
+    const city = document.getElementById("cityInput").value;
+    const country = document.getElementById("countryInput").value;
+    const temperature = document.getElementById("temperatureInput").value;
+    const precipitation = document.getElementById("precipitationInput").value;
+    const settings = [city, country, temperature, precipitation];
+    this.props.trigger(settings);
+  };
+  constructor(props) {
+    super(props);
+  }
   state = {
-      
-    city: "",
-    country:'',
+    city: '',
+    country: '',
     temperature: false,
-    precipitation: false,
-    toggle: false,
-    setToggle: false,
+    precipitation: false
   };
   handleChange = (event) => {
     const input = event.target;
@@ -17,17 +25,14 @@ import { Switch } from "antd";
     this.setState({ [input.name]: value });
   };
   handleFormSubmit = (event) => {
+    event.preventDefault();
     const { city, country, temperature, precipitation } = this.state;
     localStorage.setItem("city", city);
     localStorage.setItem("country", country);
     localStorage.setItem("temperature", temperature);
     localStorage.setItem("precipitation", precipitation);
+    this.sendData();
   };
-//    toggler = (event) => {
-//        console.log("ok");
-//        let [toggle,setToggle] = this.state;
-//          toggle ? setToggle(false) : setToggle(true);
-//       };
   componentDidMount() {
     const temperature = localStorage.getItem("temperature") === "true";
     const precipitation = localStorage.getItem("precipitation") === "true";
@@ -41,6 +46,7 @@ import { Switch } from "antd";
         <label>
           City :
           <input
+            id="cityInput"
             type="text"
             name="city"
             value={this.state.city}
@@ -51,6 +57,7 @@ import { Switch } from "antd";
         <label>
           Country :
           <input
+            id="countryInput"
             type="text"
             name="country"
             value={this.state.country}
@@ -59,20 +66,28 @@ import { Switch } from "antd";
           />
         </label>
         <label>
-          Temperature :
-          {/* <Switch  act ={this.toggler} /> */}
-          <input type="checked" name="temperature" value = {this.state.temperature} onChange={this.handleChange}/>
+          Temperature :{/* <Switch/> */}
+          <input
+          id="temperatureInput"
+            type="checked"
+            name="temperature"
+            value={this.state.temperature}
+            onChange={this.handleChange}
+          />
         </label>
         <label>
           Precipitation :
           <input
+          id="precipitationInput"
             type="checked"
             name="precipitation"
             value={this.state.precipitation}
             onChange={this.handleChange}
           />
         </label>
-        <button type="submit">Save</button>
+        <button className="btn btn-warning" type="submit">
+          Save
+        </button>
       </form>
     );
   }

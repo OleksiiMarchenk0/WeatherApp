@@ -1,3 +1,4 @@
+ /** Background image from https://www.pexels.com/photo/unrecognizable-couple-embracing-while-walking-on-pathway-near-mountains-4974917/ */
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "weather-icons/css/weather-icons.css";
@@ -9,6 +10,16 @@ import CogButton from "./app_component/cog.button/cog.button.component";
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
+  getSettingsFunction = (settingsData) => {
+    console.log(settingsData);
+    this.setState({
+      city: settingsData[0],
+      country: settingsData[1],
+      temperature: settingsData[2],
+      precipitation: settingsData[3]
+    });
+  };
+
   constructor() {
     super();
     this.state = {
@@ -19,7 +30,7 @@ class App extends Component {
       celsius: undefined,
       temp_max: undefined,
       temp_min: undefined,
-      description: '',
+      description: "",
       error: false,
       isSaveProperiesComponent: false,
     };
@@ -100,22 +111,12 @@ class App extends Component {
     let cell = Math.floor(temp - 273.15);
     return cell;
   }
-  handleShow = () => {
-    this.setState({
-      isSaveProperiesComponent: true,
-    });
-  };
-  handleHide = () => {
-    this.setState({
-      isSaveProperiesComponent: false,
-    });
-  };
   render() {
     return (
       <div className="App">
-        <CogButton />
+        <CogButton CogCallback={this.getSettingsFunction} />
         <Form
-          click={this.setDefaultSettings}
+          click={this.callbackFunction}
           city={this.state.city}
           country={this.state.country}
           loadWeather={this.getWeather}

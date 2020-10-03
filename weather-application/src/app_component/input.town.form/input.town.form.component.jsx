@@ -3,11 +3,11 @@ import "./input.town.form.style.css";
 
 class Form extends React.Component {
   state = {
-    city: "",
-    country: "",
+    city: '',
+    country: '',
   };
   constructor(props) {
-    super();
+    super(props);
   }
   handleChange = (event) => {
     const input = event.target;

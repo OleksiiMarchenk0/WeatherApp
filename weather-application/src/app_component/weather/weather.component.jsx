@@ -1,5 +1,5 @@
 import React from "react";
-/** Image from https://www.pexels.com/photo/unrecognizable-couple-embracing-while-walking-on-pathway-near-mountains-4974917/ */
+
 const Weather = (props) => {
   return (
     <div className="container">
