@@ -1,0 +1,15 @@
+.CogButtonContainer{
+    display:flex;
+    justify-content: flex-end;
+    height: 100px;
+    align-items: center;
+
+}
+.CogButton{
+    border-radius: 25px;
+    background: transparent;
+    border: none;
+}
+.CogButton:focus{
+   outline: none;
+}

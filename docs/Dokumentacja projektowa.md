@@ -25,9 +25,9 @@ Większe szansy na znalezienie nowej pracy lub na zostanie w obecnej
 [//]: <> (## Korzyści dla IT-Dev )
 # Motywacja 
 
-Potrzeba zbudowania portfolio 
+- Potrzeba zbudowania portfolio 
 
-Potrzeba znalezienia pracy  
+- Potrzeba znalezienia pracy  
 
 # Ramy czasowe  
 
@@ -47,7 +47,7 @@ Nie przewiduje się możliwości wybierania miejscowości z mapy
 
 ## Jako powracający użytkownik, mogę dostosować widok do moich potrzeb, aby uzyskiwać dokładnie te dane, które mnie interesuja 
 
-Mogę wprowadzić I zapisac ustawienia wyświetlania w zakresie: 
+Mogę wprowadzić i zapisac ustawienia wyświetlania w zakresie: 
 
 - do sprawdzenia w specyfikacji Web-Api co nam wystawia 
 
