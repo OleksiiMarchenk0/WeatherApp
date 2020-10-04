@@ -39,7 +39,7 @@ class Form extends React.Component {
         <div>
           {this.props.error ? ( <LogError errMessage={err} />) : null}
         </div>
-        <div>
+        <div className="defaultButtonContainer">
           <button onClick={this.fillFields} className="btn btn-warning">
             Use Default Parameters
           </button>

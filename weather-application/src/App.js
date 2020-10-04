@@ -22,7 +22,7 @@ class App extends Component {
       temp_min: undefined,
       description: '',
       error: false,
-      isSaveProperiesComponent: false,
+      isSaveProperiesComponent: false
     };
     this.weatherIcon = {
       Thunderstorm: "wi-thunderstorm",
@@ -42,7 +42,8 @@ class App extends Component {
       const api_call = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`
       );
-      try {
+      try 
+      {
         const response = await api_call.json();
         this.setState({
           error: false,
@@ -54,13 +55,12 @@ class App extends Component {
           description: response.weather[0].description,
         });
         this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
-      } catch {
-        console.log("err");
-        this.setState({
-          error: true,
-        });
+      } 
+      catch {
+        this.setState({error: true,});
       }
-    } else {
+    } 
+    else {
       this.setState({ error: true });
     }
   };
@@ -99,7 +99,6 @@ class App extends Component {
         break;
     }
   }
- 
   calcCelsius(temp) {
     let cell = Math.floor(temp - 273.15);
     return cell;
@@ -114,7 +113,6 @@ class App extends Component {
   };
   render() {
     return (
-      <div className="App">
       <div class="container">
       <CogButton CogCallback={this.getSettingsFunction} />
         <Form
@@ -123,7 +121,7 @@ class App extends Component {
           loadWeather={this.getWeather}
           error={this.state.error}
         />
-        
+
         <Weather
           city={this.state.city}
           country={this.state.country}
@@ -135,7 +133,6 @@ class App extends Component {
           weathericon={this.state.icon}
           isShowIcon={this.state.precipitation}  
         />
-      </div>
       </div>
     );
   }

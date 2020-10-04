@@ -17,3 +17,7 @@ form{
 .form-control:focus{
     border-color: #ffc107;
 }
+.defaultButtonContainer{
+    display: flex;
+    justify-content:center;
+}
