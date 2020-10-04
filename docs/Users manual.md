@@ -21,9 +21,9 @@ After application was running, you can see General view of the application
 | *General view of the application* |
 ||
 You can enter in field [1] city, and click [2] for getting the weather [3]
-| ![space-1.jpg](./assets/search-steps.png)
+| ![space-1.jpg](./assets/search-steps.png)|
 |:--:| 
-| *Showing actual weather after input data* 
+| *Showing actual weather after input data* |
 ||
 You can also save town which you want to use as default, by clicking on cog button [1].
 - After button [1] will has clicked, you will see field [2]
