@@ -2,11 +2,11 @@
 
 
 ## Prerequisite
+- <a href="https://www.google.pl/chrome/" target="_blank">Web browser (as example : Google Chrome)</a>
+- <a href="https://code.visualstudio.com/Download" target="_blank">IDE (as example VS Code)</a>
+- <a href="https://nodejs.org/en/download/" target="_blank">Node.js - version 8.16.0</a>
+- <a href="https://reactjs.org/docs/getting-started.html#try-react" target="_blank">React.js</a>
 
-- [Web browser (as example : Google Chrome)](https://www.google.pl/chrome/)
-- [IDE (as example VS Code)](https://code.visualstudio.com/Download)
-- [Node.js - version 8.16.0](https://nodejs.org/en/download/)
-- [React.js](https://reactjs.org/docs/getting-started.html#try-react)
 
 ## Running application
 For run the application you should :
