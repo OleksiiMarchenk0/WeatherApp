@@ -2,11 +2,9 @@
     display:flex;
     justify-content: flex-end;
     height: 100px;
-    align-items: center;
-
+    transition: 0.3s;
 }
 .CogButton{
-    border-radius: 25px;
     background: transparent;
     border: none;
 }
