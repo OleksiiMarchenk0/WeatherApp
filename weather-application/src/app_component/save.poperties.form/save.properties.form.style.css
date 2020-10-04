@@ -4,6 +4,12 @@
 }
 label{
     margin-bottom: 0;
+    margin-right: 5px;
+}
+.clearField{
+    background: transparent;
+    border:none;
+    color:gray;
 }
 form{
     margin-top: 3rem; 
@@ -12,6 +18,7 @@ form{
  input[name="country"]
 {
     background-color: transparent;
+    text-transform: capitalize;
     color:gray;
     border-radius: 0;
     border:none;
