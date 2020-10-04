@@ -17,6 +17,7 @@ class Form extends React.Component {
     let temperature = localStorage.getItem("temperature") || "";
     let precipitation = localStorage.getItem("precipitation") || "";
     let data = [city, country, temperature, precipitation];
+    console.log(precipitation)
     return data;
   };
   fillFields = () => {

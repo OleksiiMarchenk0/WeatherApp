@@ -21,3 +21,150 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/** Code By Webdevtrick ( https://webdevtrick.com ) **/
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #212121;
+  font-size: 16px;
+}
+ul li {
+  list-style-type: none;
+}
+.wrapper {
+  width: 550px;
+  margin: 85px auto;
+}
+.form-fields {
+  background: #ecf0f1;
+}
+.field {
+  padding: 15px;
+}
+.field:first-child {
+  border-top: none;
+}
+input[type="checkbox"] {
+  display: none;
+}
+.field {
+  display: relative;
+}
+.field label {
+  position: relative;
+  line-height: 32px;
+  display: block;
+}
+.field label:before,
+.field label:after,
+.field label span:before,
+.field label span:after {
+  content: '';
+  display: block;
+  position: absolute;
+}
+.field label span {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  float: right;
+}
+ 
+.check-round label span {
+  border-radius: 16px;
+  height: 32px;
+  width: 64px;
+}
+.check-round label span:before {
+  border-radius: 50%;
+  height: 28px;
+  width: 28px;
+  left: 2px;
+  top: 2px;
+}
+.check-round input:checked + label span:before {
+  left: 34px;
+}
+.check-round.slide label span {
+  background: #e74c3c;
+  transition: background 0.4s ease-in;
+}
+.check-round.slide label span:before {
+  background: #ECF0F1;
+  transition: left 0.4s ease-in;
+}
+.check-round.slide input:checked + label span {
+  background: #2ecc71;
+}
+.check-round.slide-inverse label span {
+  background: #ECF0F1;
+  border: 1px solid #bdc3c7;
+}
+.check-round.slide-inverse label span:before {
+  background: #e74c3c;
+  transition: left 0.4s ease-in, background 0.4s ease-in;
+}
+.check-round.slide-inverse input:checked + label span:before {
+  background: #2ecc71;
+}
+ 
+ 
+.check-square label span {
+  height: 32px;
+  width: 64px;
+}
+.check-square label span:before {
+  height: 100%;
+  width: 50%;
+  top: -1px;
+  border: 1px solid #bdc3c7;
+}
+.check-square label span:after {
+  height: 100%;
+  width: 50%;
+  left: 0px;
+}
+ 
+ 
+.check-square.slide-top label span {
+  background: #e74c3c;
+  transition: background 0.4s ease-in;
+}
+.check-square.slide-top label span:before {
+  background: #ECF0F1;
+  transition: left 0.4s ease-in;
+}
+.check-square.slide-top label span:after {
+  transition: left 0.4s ease-in;
+}
+.check-square.slide-top input:checked + label span:before,
+.check-square.slide-top input:checked + label span:after {
+  left: 34px;
+}
+.check-square.slide-top input:checked + label span {
+  background: #2ecc71;
+}
+ 
+ 
+.check-square.flip-top label {
+  perspective: 250px;
+}
+.check-square.flip-top label span {
+  background: #e74c3c;
+}
+.check-square.flip-top label span:before {
+  left: -2px;
+  transform-origin: center right;
+  transform: rotateX(0deg) rotateZ(0deg) rotateY(0deg);
+  background: #ECF0F1;
+  transition: all 0.6s ease-in;
+  z-index: 101;
+}
+.check-square.flip-top label span:after {
+  background: #2ecc71;
+  z-index: 100;
+}
+.check-square.flip-top input:checked + label span:before,
+.check-square.flip-top input:checked + label span:after {
+  transform: rotateX(0deg) rotateY(180deg) rotateY(0deg);
+}

@@ -24,7 +24,7 @@ input:focus {
 .form-control:focus {
     border-color: #ffc107;
 }
-.myCard {
+.formCard {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -37,3 +37,5 @@ input:focus {
     padding: 1em;
     box-shadow: 0 0 10px 5px rgb(164, 187, 224);
 }
+
+/*----------*/

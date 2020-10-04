@@ -6,30 +6,21 @@ import "./App.css";
 import Weather from "./app_component/weather/weather.component.jsx";
 import Form from "./app_component/input.town.form/input.town.form.component.jsx";
 import CogButton from "./app_component/cog.button/cog.button.component";
-import LogError from "./app_component/log.error/log.error";
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
-  getSettingsFunction = (settingsData) => {
-    console.log(settingsData);
-    this.setState({
-      city: settingsData[0],
-      country: settingsData[1],
-      temperature: settingsData[2],
-      precipitation: settingsData[3],
-    });
-  };
   constructor() {
     super();
     this.state = {
-      city: "",
-      country: "",
+      city: '',
+      country: '',
+      precipitation:true,
       icon: undefined,
       main: undefined,
       celsius: undefined,
       temp_max: undefined,
       temp_min: undefined,
-      description: "",
+      description: '',
       error: false,
       isSaveProperiesComponent: false,
     };
@@ -43,7 +34,36 @@ class App extends Component {
       Clouds: "wi-day-fog",
     };
   }
-
+  getWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    const country = e.target.elements.country.value;
+    if (city) {
+      const api_call = await fetch(
+        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`
+      );
+      try {
+        const response = await api_call.json();
+        this.setState({
+          error: false,
+          precipitation: localStorage.getItem("precipitation"),
+          city: `${response.name},${response.sys.country}`,
+          celsius: this.calcCelsius(response.main.temp),
+          temp_max: this.calcCelsius(response.main.temp_max),
+          temp_min: this.calcCelsius(response.main.temp_min),
+          description: response.weather[0].description,
+        });
+        this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
+      } catch {
+        console.log("err");
+        this.setState({
+          error: true,
+        });
+      }
+    } else {
+      this.setState({ error: true });
+    }
+  };
   getWeatherIcon(icon, rangeID) {
     switch (true) {
       /* Thunderstorm */
@@ -79,40 +99,19 @@ class App extends Component {
         break;
     }
   }
-  getWeather = async (e) => {
-    e.preventDefault();
-    const city = e.target.elements.city.value;
-    const country = e.target.elements.country.value;
-    if (city) {
-      const api_call = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`
-      );
-      try {
-        const response = await api_call.json();
-        console.log(response)
-        this.setState({
-          error: false,
-          city: `${response.name},${response.sys.country}`,
-          celsius: this.calcCelsius(response.main.temp),
-          temp_max: this.calcCelsius(response.main.temp_max),
-          temp_min: this.calcCelsius(response.main.temp_min),
-          description: response.weather[0].description,
-        });
-        this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
-      } catch {
-        console.log("err");
-        this.setState({
-          error: true,
-        });
-      }
-    } else {
-      this.setState({ error: true });
-    }
-  };
+ 
   calcCelsius(temp) {
     let cell = Math.floor(temp - 273.15);
     return cell;
   }
+  getSettingsFunction = (settingsData) => {
+    this.setState({
+      city: settingsData[0],
+      country: settingsData[1],
+      temperature: settingsData[2],
+      precipitation: settingsData[3],
+    });
+  };
   render() {
     return (
       <div className="App">
@@ -132,10 +131,11 @@ class App extends Component {
           temp_max={this.state.temp_max}
           temp_min={this.state.temp_min}
           description={this.state.description}
+          precipitation={this.state.precipitation}     
           weathericon={this.state.icon}
+          isShowIcon={this.state.precipitation}  
         />
       </div>
-        
       </div>
     );
   }
