@@ -99,9 +99,11 @@ class App extends Component {
           description: response.weather[0].description,
         });
         this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
-      } 
-      catch {
-        console.log(Error);
+      } catch {
+        console.log("err");
+        this.setState({
+          error: true,
+        });
       }
     } else {
       this.setState({ error: true });
