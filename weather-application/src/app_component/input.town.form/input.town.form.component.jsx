@@ -17,6 +17,7 @@ class Form extends React.Component {
     let temperature = localStorage.getItem("temperature") || "";
     let precipitation = localStorage.getItem("precipitation") || "";
     let data = [city, country, temperature, precipitation];
+    console.log(precipitation)
     return data;
   };
   fillFields = () => {
@@ -38,7 +39,7 @@ class Form extends React.Component {
         <div>
           {this.props.error ? ( <LogError errMessage={err} />) : null}
         </div>
-        <div>
+        <div className="defaultButtonContainer">
           <button onClick={this.fillFields} className="btn btn-warning">
             Use Default Parameters
           </button>

@@ -12,9 +12,7 @@ export default class CogButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-         isSaveProperiesComponent: false,
-         city:'',
-         country:''
+         isSaveProperiesComponent: false
     };
   }
   handleToggle = () => {

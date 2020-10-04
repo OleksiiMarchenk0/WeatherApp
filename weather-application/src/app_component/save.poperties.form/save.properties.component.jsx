@@ -6,8 +6,7 @@ class SavePropertiesForm extends Component {
     super(props);
     this.cityInput = React.createRef();
     this.countryInput = React.createRef();
-    this.temperatureInput = React.createRef();
-    this.precipitationInput = React.createRef();
+    this.precipitationSwitch = React.createRef();
   }
   state = {
     city: '',
@@ -16,13 +15,8 @@ class SavePropertiesForm extends Component {
     precipitation: false,
   };
   toggler = () => {
-    let newTemperature = !this.state.temperature;
-    this.setState(
-      {
-        temperature: newTemperature,
-      },
-      console.log(this.state.temperature)
-    );
+    this.state.precipitation = !this.state.precipitation;
+    this.setState({precipitation: this.state.precipitation});
   };
   sendData = () => {
     const city = this.cityInput.current.value;
@@ -44,20 +38,14 @@ class SavePropertiesForm extends Component {
     localStorage.setItem("country", country);
     localStorage.setItem("temperature", temperature);
     localStorage.setItem("precipitation", precipitation);
+    console.log(precipitation);
     this.sendData();
   };
-  componentDidMount() {
-    const temperature = localStorage.getItem("temperature") === "true";
-    const precipitation = localStorage.getItem("precipitation") === "true";
-    const city = localStorage.getItem("city");
-    const country = localStorage.getItem("country");
-    this.setState({ city, country, temperature, precipitation });
-  }
   render() {
     return (
       <form
         onSubmit={this.handleFormSubmit}
-        className="myCard"
+        className="formCard"
       >
         <h3>Set default settings</h3>
         <div className="row">
@@ -83,12 +71,8 @@ class SavePropertiesForm extends Component {
           />
         </div>
         <div className="row">
-          <label>Temperature :</label>
-          <Switch enabled onClick={this.toggler} />
-        </div>
-        <div className="row">
           <label> Precipitation : </label>
-          <Switch onClick={this.toggler} />
+          <Switch ref={this.precipitationSwitch} onClick={this.toggler} />
         </div>
         <button className="btn btn-warning" type="submit">
           Save
