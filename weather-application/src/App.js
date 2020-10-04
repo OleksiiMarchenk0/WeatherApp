@@ -6,7 +6,7 @@ import "./App.css";
 import Weather from "./app_component/weather/weather.component.jsx";
 import Form from "./app_component/input.town.form/input.town.form.component.jsx";
 import CogButton from "./app_component/cog.button/cog.button.component";
-import LogError from "./app_component/log.error";
+import LogError from "./app_component/log.error/log.error";
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
@@ -99,11 +99,9 @@ class App extends Component {
           description: response.weather[0].description,
         });
         this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
-      } catch {
-        console.log("err");
-        this.setState({
-          error: true,
-        });
+      } 
+      catch {
+        console.log(Error);
       }
     } else {
       this.setState({ error: true });
@@ -124,7 +122,7 @@ class App extends Component {
           loadWeather={this.getWeather}
           error={this.state.error}
         />
-        {this.state.error ? <LogError errMessage="City not found" /> : null}
+        
         <Weather
           city={this.state.city}
           country={this.state.country}

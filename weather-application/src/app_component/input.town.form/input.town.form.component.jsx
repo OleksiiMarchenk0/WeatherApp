@@ -1,10 +1,10 @@
 import React from "react";
 import "./input.town.form.style.css";
-import LogError from "../log.error";
+import LogError from "../log.error/log.error";
 class Form extends React.Component {
   state = {
-    city: "",
-    country: "",
+    city: '',
+    country: '',
   };
   constructor(props) {
     super(props);
@@ -32,17 +32,16 @@ class Form extends React.Component {
     this.setState({ [input.name]: value });
   };
   render() {
+    const err = 'City not found. Try again.';
     return (
       <div className="container">
+        <div>
+          {this.props.error ? ( <LogError errMessage={err} />) : null}
+        </div>
         <div>
           <button onClick={this.fillFields} className="btn btn-warning">
             Use Default Parameters
           </button>
-        </div>
-        <div>
-          {this.props.error ? (
-            <LogError errMessage="Please enter values" />
-          ) : null}
         </div>
         <form onSubmit={this.props.loadWeather}>
           <div className="row">
