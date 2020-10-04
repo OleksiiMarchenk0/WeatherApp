@@ -10,8 +10,8 @@ class SavePropertiesForm extends Component {
     this.precipitationInput = React.createRef();
   }
   state = {
-    city: "",
-    country: "",
+    city: '',
+    country: '',
     temperature: false,
     precipitation: false,
   };
@@ -57,7 +57,7 @@ class SavePropertiesForm extends Component {
     return (
       <form
         onSubmit={this.handleFormSubmit}
-        className="card py-3 my-3 d-flex align-items-center alert alert-info"
+        className="myCard"
       >
         <h3>Set default settings</h3>
         <div className="row">
