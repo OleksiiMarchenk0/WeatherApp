@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./save.properties.form.style.css";
+import Select from "react-select";
 import { Switch } from "antd";
 class SavePropertiesForm extends Component {
   constructor(props) {
@@ -11,19 +12,28 @@ class SavePropertiesForm extends Component {
   state = {
     city: '',
     country: '',
-    temperature: false,
+    unitEmbedInUrl:'metric',
+    units: [
+      { value: "metric", label: "C" },
+      { value: "imperial", label: "F" },
+      { value: "default", label: "K" },
+    ],
+    unitFull: {
+      value: "metric",
+      label: "C",
+    },
     precipitation: false,
   };
   toggler = () => {
     this.state.precipitation = !this.state.precipitation;
-    this.setState({precipitation: this.state.precipitation});
+    this.setState({ precipitation: this.state.precipitation });
   };
   sendData = () => {
     const city = this.cityInput.current.value;
     const country = this.countryInput.current.value;
-    const temperature = this.state.temperature;
     const precipitation = this.state.precipitation;
-    const settings = [city, country, temperature, precipitation];
+    const actualUnit = JSON.stringify(this.state.actualUnit);
+    const settings = [city, country, actualUnit,precipitation];
     this.props.trigger(settings);
   };
   handleChange = (event) => {
@@ -33,20 +43,28 @@ class SavePropertiesForm extends Component {
   };
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { city, country, temperature, precipitation } = this.state;
+    const { city, country,unitFull, unitEmbedInUrl, precipitation } = this.state;
     localStorage.setItem("city", city);
     localStorage.setItem("country", country);
-    localStorage.setItem("temperature", temperature);
     localStorage.setItem("precipitation", precipitation);
-    console.log(precipitation);
+    localStorage.setItem("unitEmbedInUrl", unitEmbedInUrl);
+    console.log(unitFull)
+    localStorage.setItem("unitFull", JSON.stringify(unitFull));
     this.sendData();
   };
+  handleSelect = (event) => {
+    console.log(event.value);
+    let unitEmbedInUrl = event.value;
+    console.log(unitEmbedInUrl);
+   this.setState({
+    unitFull:{event},
+    unitEmbedInUrl:unitEmbedInUrl
+   })
+  };
   render() {
+    let { units,unitFull } = this.state;
     return (
-      <form
-        onSubmit={this.handleFormSubmit}
-        className="formCard"
-      >
+      <form onSubmit={this.handleFormSubmit} className="formCard">
         <h3>Set default settings</h3>
         <div className="row">
           <label>City : </label>
@@ -73,6 +91,13 @@ class SavePropertiesForm extends Component {
         <div className="row">
           <label> Precipitation : </label>
           <Switch ref={this.precipitationSwitch} onClick={this.toggler} />
+        </div>
+        <div className="row">
+          <Select
+            defaultValue={unitFull}
+            options={units}
+            onChange={this.handleSelect}
+          />
         </div>
         <button className="btn btn-warning" type="submit">
           Save

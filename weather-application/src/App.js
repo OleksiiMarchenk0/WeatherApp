@@ -12,17 +12,18 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      city: '',
-      country: '',
-      precipitation:true,
+      city: "",
+      country: "",
+      unitEmbedInUrl: "metric",
+      precipitation: true,
       icon: undefined,
       main: undefined,
       celsius: undefined,
       temp_max: undefined,
       temp_min: undefined,
-      description: '',
+      description: "",
       error: false,
-      isSaveProperiesComponent: false
+      isSaveProperiesComponent: false,
     };
     this.weatherIcon = {
       Thunderstorm: "wi-thunderstorm",
@@ -34,33 +35,37 @@ class App extends Component {
       Clouds: "wi-day-fog",
     };
   }
+  componentDidMount() {
+    let unitEmbedInUrl = localStorage.getItem("unitEmbedInUrl") || this.state.unitEmbedInUrl;
+    this.setState({
+      unitEmbedInUrl: unitEmbedInUrl,
+    });
+  }
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
+    const {unitEmbedInUrl} = this.state;
     if (city) {
       const api_call = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${API_key}`
+        `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=${unitEmbedInUrl}&appid=${API_key}`
       );
-      try 
-      {
+      try {
         const response = await api_call.json();
         this.setState({
           error: false,
           precipitation: localStorage.getItem("precipitation"),
           city: `${response.name},${response.sys.country}`,
-          celsius: this.calcCelsius(response.main.temp),
-          temp_max: this.calcCelsius(response.main.temp_max),
-          temp_min: this.calcCelsius(response.main.temp_min),
+          celsius: Math.floor(response.main.temp),
+          temp_max: Math.floor(response.main.temp_max),
+          temp_min: Math.floor(response.main.temp_min),
           description: response.weather[0].description,
         });
         this.getWeatherIcon(this.weatherIcon, response.weather[0].id);
-      } 
-      catch {
-        this.setState({error: true,});
+      } catch {
+        this.setState({ error: true });
       }
-    } 
-    else {
+    } else {
       this.setState({ error: true });
     }
   };
@@ -99,22 +104,19 @@ class App extends Component {
         break;
     }
   }
-  calcCelsius(temp) {
-    let cell = Math.floor(temp - 273.15);
-    return cell;
-  }
   getSettingsFunction = (settingsData) => {
     this.setState({
       city: settingsData[0],
       country: settingsData[1],
       temperature: settingsData[2],
-      precipitation: settingsData[3],
+      actualUnit: settingsData[3],
+      precipitation: settingsData[4],
     });
   };
   render() {
     return (
       <div class="container">
-      <CogButton CogCallback={this.getSettingsFunction} />
+        <CogButton CogCallback={this.getSettingsFunction} />
         <Form
           city={this.state.city}
           country={this.state.country}
@@ -129,9 +131,9 @@ class App extends Component {
           temp_max={this.state.temp_max}
           temp_min={this.state.temp_min}
           description={this.state.description}
-          precipitation={this.state.precipitation}     
+          precipitation={this.state.precipitation}
           weathericon={this.state.icon}
-          isShowIcon={this.state.precipitation}  
+          isShowIcon={this.state.precipitation}
         />
       </div>
     );

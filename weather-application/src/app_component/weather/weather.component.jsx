@@ -1,5 +1,6 @@
 import React from "react";
-import './weather.component.styles.css'
+
+import "./weather.component.styles.css";
 const Weather = (props) => {
   return (
     <div className="container">
@@ -8,10 +9,12 @@ const Weather = (props) => {
         <h5 className="py-4">
           {props.isShowIcon ? (
             <i className={`wi ${props.weathericon} display-1 `}></i>
-          ) : console.log(props.isShowIcon)}
+          ) : (
+            console.log(props.isShowIcon)
+          )}
         </h5>
         {props.temp_celsius ? (
-          <h1 className="py-2">{props.temp_celsius}&deg;</h1>
+          <h1 className="py-2">{props.temp_celsius}&deg; C</h1>
         ) : null}
         {minmaxTemp(props.temp_min, props.temp_max)}
         <h4 className="py-3">{props.description}</h4>
