@@ -14,10 +14,10 @@ class Form extends React.Component {
   getDataFromCache = () => {
     let city = localStorage.getItem("city") || "";
     let country = localStorage.getItem("country") || "";
-    let temperature = localStorage.getItem("temperature") || "";
+    let unit = localStorage.getItem("unit") || "";
     let precipitation = localStorage.getItem("precipitation") || "";
-    let data = [city, country, temperature, precipitation];
-    console.log(precipitation)
+    let data = [city, country,unit, precipitation];
+    console.log(unit)
     return data;
   };
   fillFields = () => {
