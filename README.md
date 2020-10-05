@@ -9,4 +9,5 @@ Simple Weather WebApp based on React with using external API
 ## Documents
   - [Project documentation - PL](./docs/Dokumentacja%20projektowa.md)
   - [Users manual](./docs/Users%20manual.md)
+  - [API Documentation](./docs/API%20documentation.md)
     
