@@ -3,12 +3,6 @@ import SavePropertiesForm from '../save.poperties.form/save.properties.component
 import "./cog.button.style.css";
 import"../../flaticon/flaticon.css";
 export default class CogButton extends Component {
-  sendData = (settingsData) => {
-    //send data to cog.component
-    this.props.CogCallback(settingsData);
-    //hides save.properties component
-    this.handleToggle();
-}
   constructor(props) {
     super(props);
     this.state = {
@@ -16,6 +10,7 @@ export default class CogButton extends Component {
     };
   }
   handleToggle = () => {
+    this.props.CogCallback();
     this.setState({
       isSaveProperiesComponent: !this.state.isSaveProperiesComponent
     });
@@ -28,7 +23,7 @@ export default class CogButton extends Component {
           <i class="flaticon-gear"></i>
         </button>
           </div>
-        {this.state.isSaveProperiesComponent ? <SavePropertiesForm trigger = {this.sendData}  />: null }
+        {this.state.isSaveProperiesComponent ? <SavePropertiesForm saveComponentTrigger= {this.handleToggle}  />: null }
       </div>
     );
   }
