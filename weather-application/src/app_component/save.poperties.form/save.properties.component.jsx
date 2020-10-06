@@ -29,16 +29,6 @@ class SavePropertiesForm extends Component {
     this.state.precipitation = !this.state.precipitation;
     this.setState({ precipitation: this.state.precipitation });
   };
-  // sendData = () => {
-  //   const city = this.cityInput.current.value;
-  //   console.log(city)
-  //   const country = this.countryInput.current.value;
-  //   const precipitation = this.state.precipitation;
-  //   const actualUnit = JSON.stringify(this.state.actualUnit);
-  //   const isShowWeather= false;
-  //   const settings = [city, country, actualUnit,precipitation,isShowWeather];
-  //   this.props.trigger(settings);
-  // };
   handleChange = (event) => {
     const input = event.target;
     const value = input.type === "checkbox" ? input.checked : input.value;
