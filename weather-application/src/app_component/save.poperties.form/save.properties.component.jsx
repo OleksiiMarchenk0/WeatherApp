@@ -23,21 +23,22 @@ class SavePropertiesForm extends Component {
       label: "C",
     },
     precipitation: false,
-    isShowWeather:true
+    isShowWeather:false
   };
   toggler = () => {
     this.state.precipitation = !this.state.precipitation;
     this.setState({ precipitation: this.state.precipitation });
   };
-  sendData = () => {
-    const city = this.cityInput.current.value;
-    const country = this.countryInput.current.value;
-    const precipitation = this.state.precipitation;
-    const actualUnit = JSON.stringify(this.state.actualUnit);
-    const isShowWeather= false;
-    const settings = [city, country, actualUnit,precipitation,isShowWeather];
-    this.props.trigger(settings);
-  };
+  // sendData = () => {
+  //   const city = this.cityInput.current.value;
+  //   console.log(city)
+  //   const country = this.countryInput.current.value;
+  //   const precipitation = this.state.precipitation;
+  //   const actualUnit = JSON.stringify(this.state.actualUnit);
+  //   const isShowWeather= false;
+  //   const settings = [city, country, actualUnit,precipitation,isShowWeather];
+  //   this.props.trigger(settings);
+  // };
   handleChange = (event) => {
     const input = event.target;
     const value = input.type === "checkbox" ? input.checked : input.value;
@@ -45,13 +46,14 @@ class SavePropertiesForm extends Component {
   };
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { city, country,unitFull, unitEmbedInUrl, precipitation } = this.state;
+    const { city, country,unitFull, unitEmbedInUrl, precipitation,isShowWeather } = this.state;
     localStorage.setItem("city", city);
     localStorage.setItem("country", country);
     localStorage.setItem("precipitation", precipitation);
     localStorage.setItem("unitEmbedInUrl", unitEmbedInUrl);
     localStorage.setItem("unitFull", JSON.stringify(unitFull));
-    this.sendData();
+    localStorage.setItem("isShowWeather", isShowWeather);
+    this.props.saveComponentTrigger();
   
   };
   handleSelect = (event) => {

@@ -47,7 +47,9 @@ class App extends Component {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
-    const { unitEmbedInUrl } = this.state;
+    let { unitEmbedInUrl } = this.state;
+    unitEmbedInUrl = localStorage.getItem("unitEmbedInUrl") || unitEmbedInUrl;
+    console.log(unitEmbedInUrl);
     if (city) {
       console.log("ok");
       const api_call = await fetch(
@@ -109,14 +111,28 @@ class App extends Component {
         break;
     }
   }
-  getSettingsFunction = (settingsData) => {
+  getSettingsFunction = () => {
+    let {
+      city,
+      country,
+      precipitation,
+      actualUnit,
+      unitEmbedInUrl,
+      isShowWeather,
+    } = this.state;
+    city = localStorage.getItem("city") || city;
+    country = localStorage.getItem("country") || country;
+    precipitation = localStorage.getItem("precipitation") || precipitation;
+    actualUnit = localStorage.getItem("actualUnit") || actualUnit;
+    isShowWeather = localStorage.getItem("isShowWeather") || isShowWeather;
+    unitEmbedInUrl = localStorage.getItem("unitEmbedInUrl") || unitEmbedInUrl;
     this.setState(
       {
-        city: settingsData[0],
-        country: settingsData[1],
-        actualUnit: settingsData[2],
-        precipitation: settingsData[3],
-        isShowWeather: settingsData[4],
+        city: city,
+        country: country,
+        actualUnit: actualUnit,
+        precipitation: precipitation,
+        isShowWeather: false,
       },
       console.log(this.state.isShowWeather)
     );
@@ -126,7 +142,7 @@ class App extends Component {
       <div class="container">
         <CogButton CogCallback={this.getSettingsFunction} />
         <Form
-          city={this.state.city}
+          city={this.state.city} 
           country={this.state.country}
           loadWeather={this.getWeather}
           error={this.state.error}
