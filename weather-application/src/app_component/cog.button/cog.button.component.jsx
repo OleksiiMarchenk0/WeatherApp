@@ -8,6 +8,7 @@ export default class CogButton extends Component {
     this.props.CogCallback(settingsData);
     //hides save.properties component
     this.handleToggle();
+    // tu mam iisshow
 }
   constructor(props) {
     super(props);

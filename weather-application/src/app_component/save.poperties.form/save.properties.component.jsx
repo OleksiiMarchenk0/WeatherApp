@@ -23,6 +23,7 @@ class SavePropertiesForm extends Component {
       label: "C",
     },
     precipitation: false,
+    isShowWeather:true
   };
   toggler = () => {
     this.state.precipitation = !this.state.precipitation;
@@ -33,7 +34,8 @@ class SavePropertiesForm extends Component {
     const country = this.countryInput.current.value;
     const precipitation = this.state.precipitation;
     const actualUnit = JSON.stringify(this.state.actualUnit);
-    const settings = [city, country, actualUnit,precipitation];
+    const isShowWeather= false;
+    const settings = [city, country, actualUnit,precipitation,isShowWeather];
     this.props.trigger(settings);
   };
   handleChange = (event) => {
@@ -48,14 +50,12 @@ class SavePropertiesForm extends Component {
     localStorage.setItem("country", country);
     localStorage.setItem("precipitation", precipitation);
     localStorage.setItem("unitEmbedInUrl", unitEmbedInUrl);
-    console.log(unitFull)
     localStorage.setItem("unitFull", JSON.stringify(unitFull));
     this.sendData();
+  
   };
   handleSelect = (event) => {
-    console.log(event.value);
     let unitEmbedInUrl = event.value;
-    console.log(unitEmbedInUrl);
    this.setState({
     unitFull:{event},
     unitEmbedInUrl:unitEmbedInUrl
