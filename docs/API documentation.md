@@ -58,4 +58,4 @@ https://api.openweathermap.org/data/2.5/weather?q=London&appid=29dce02c8a2f97ff4
 ```
 
 ## Sources
-- [Official OpenWeather API guide](https://openweathermap.org/)
+- [Official OpenWeather API guide](https://openweathermap.org/current)

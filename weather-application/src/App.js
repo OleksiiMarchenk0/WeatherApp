@@ -14,6 +14,10 @@ class App extends Component {
     this.state = {
       city: "",
       country: "",
+      unitFull: {
+        value: "metric",
+        label: "C",
+      },
       unitEmbedInUrl: "metric",
       precipitation: true,
       icon: undefined,
@@ -39,8 +43,11 @@ class App extends Component {
   componentDidMount() {
     let unitEmbedInUrl =
       localStorage.getItem("unitEmbedInUrl") || this.state.unitEmbedInUrl;
+      let unitFull =
+      localStorage.getItem("unitFull") || this.state.unitFull;
     this.setState({
       unitEmbedInUrl: unitEmbedInUrl,
+      unitFull:unitFull
     });
   }
   getWeather = async (e) => {
@@ -158,6 +165,7 @@ class App extends Component {
             precipitation={this.state.precipitation}
             weathericon={this.state.icon}
             isShowIcon={this.state.precipitation}
+            unitFull ={this.state.unitFull}
           />
         ) : (
           console.log("err")
