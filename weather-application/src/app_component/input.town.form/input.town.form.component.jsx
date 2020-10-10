@@ -1,6 +1,7 @@
 import React from "react";
 import "./input.town.form.style.css";
 import LogError from "../log.error/log.error";
+
 class Form extends React.Component {
   state = {
     city: '',
@@ -53,7 +54,6 @@ class Form extends React.Component {
                 className="form-control"
                 name="city"
                 placeholder="City"
-                autoComplete="off"
                 onChange={this.handleChange}
                 value={this.state.city}
               />
@@ -65,7 +65,6 @@ class Form extends React.Component {
                 className="form-control"
                 name="country"
                 placeholder="Country"
-                autoComplete="off"
                 onChange={this.handleChange}
                 value={this.state.country}
               />

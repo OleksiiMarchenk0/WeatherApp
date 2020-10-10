@@ -7,12 +7,11 @@ class SavePropertiesForm extends Component {
     super(props);
     this.cityInput = React.createRef();
     this.countryInput = React.createRef();
-    this.precipitationSwitch = React.createRef();
   }
   state = {
-    city: '',
-    country: '',
-    unitEmbedInUrl:'metric',
+    city: "",
+    country: "",
+    unitEmbedInUrl: "metric",
     units: [
       { value: "metric", label: "C" },
       { value: "imperial", label: "F" },
@@ -23,7 +22,7 @@ class SavePropertiesForm extends Component {
       label: "C",
     },
     precipitation: false,
-    isShowWeather:false
+    isShowWeather: false,
   };
   toggler = () => {
     this.state.precipitation = !this.state.precipitation;
@@ -36,7 +35,14 @@ class SavePropertiesForm extends Component {
   };
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const { city, country,unitFull, unitEmbedInUrl, precipitation,isShowWeather } = this.state;
+    const {
+      city,
+      country,
+      unitFull,
+      unitEmbedInUrl,
+      precipitation,
+      isShowWeather,
+    } = this.state;
     localStorage.setItem("city", city);
     localStorage.setItem("country", country);
     localStorage.setItem("precipitation", precipitation);
@@ -44,17 +50,16 @@ class SavePropertiesForm extends Component {
     localStorage.setItem("unitFull", JSON.stringify(unitFull));
     localStorage.setItem("isShowWeather", isShowWeather);
     this.props.saveComponentTrigger();
-  
   };
   handleSelect = (event) => {
-    let unitEmbedInUrl = event.value;
-   this.setState({
-    unitFull:{event},
-    unitEmbedInUrl:unitEmbedInUrl
-   })
+    const unitEmbedInUrl = event.value;
+    this.setState({
+      unitFull: { event },
+      unitEmbedInUrl: unitEmbedInUrl,
+    });
   };
   render() {
-    let { units,unitFull } = this.state;
+    let { units, unitFull } = this.state;
     return (
       <form onSubmit={this.handleFormSubmit} className="formCard">
         <h3>Set default settings</h3>
@@ -82,7 +87,7 @@ class SavePropertiesForm extends Component {
         </div>
         <div className="row">
           <label> Precipitation : </label>
-          <Switch ref={this.precipitationSwitch} onClick={this.toggler} />
+          <Switch onClick={this.toggler} />
         </div>
         <div className="row">
           <Select
@@ -91,9 +96,7 @@ class SavePropertiesForm extends Component {
             onChange={this.handleSelect}
           />
         </div>
-        <button className="btn btn-warning" type="submit">
-          Save
-        </button>
+        <button className="btn btn-warning" type="submit">Save</button>
       </form>
     );
   }
