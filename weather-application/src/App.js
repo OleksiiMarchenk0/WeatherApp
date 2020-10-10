@@ -6,6 +6,7 @@ import "./App.css";
 import Weather from "./app_component/weather/weather.component.jsx";
 import Form from "./app_component/input.town.form/input.town.form.component.jsx";
 import CogButton from "./app_component/cog.button/cog.button.component";
+
 const API_key = "29dce02c8a2f97ff423e9f733810cfa7";
 
 class App extends Component {
@@ -40,25 +41,16 @@ class App extends Component {
       Clouds: "wi-day-fog",
     };
   }
-  componentDidMount() {
-    let unitEmbedInUrl =
-      localStorage.getItem("unitEmbedInUrl") || this.state.unitEmbedInUrl;
-      let unitFull =
-      localStorage.getItem("unitFull") || this.state.unitFull;
-    this.setState({
-      unitEmbedInUrl: unitEmbedInUrl,
-      unitFull:unitFull
-    });
-  }
   getWeather = async (e) => {
     e.preventDefault();
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
-    let { unitEmbedInUrl } = this.state;
+    let { unitEmbedInUrl, unitFull } = this.state;
     unitEmbedInUrl = localStorage.getItem("unitEmbedInUrl") || unitEmbedInUrl;
-    console.log(unitEmbedInUrl);
-    if (city) {
-      console.log("ok");
+    unitFull = localStorage.getItem("unitFull") || this.state.unitFull;
+   
+    if (city) 
+    {
       const api_call = await fetch(
         `http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&units=${unitEmbedInUrl}&appid=${API_key}`
       );
@@ -66,12 +58,11 @@ class App extends Component {
         const response = await api_call.json();
         this.setState({
           error: false,
-          precipitation:
-            localStorage.getItem("precipitation") || this.state.precipitation,
           city: `${response.name},${response.sys.country}`,
           celsius: Math.floor(response.main.temp),
           isShowWeather: true,
           temp_max: Math.floor(response.main.temp_max),
+          unitFull: unitFull,
           temp_min: Math.floor(response.main.temp_min),
           description: response.weather[0].description,
         });
@@ -127,29 +118,27 @@ class App extends Component {
       unitEmbedInUrl,
       isShowWeather,
     } = this.state;
+
     city = localStorage.getItem("city") || city;
     country = localStorage.getItem("country") || country;
     precipitation = localStorage.getItem("precipitation") || precipitation;
     actualUnit = localStorage.getItem("actualUnit") || actualUnit;
     isShowWeather = localStorage.getItem("isShowWeather") || isShowWeather;
     unitEmbedInUrl = localStorage.getItem("unitEmbedInUrl") || unitEmbedInUrl;
-    this.setState(
-      {
-        city: city,
-        country: country,
-        actualUnit: actualUnit,
-        precipitation: precipitation,
-        isShowWeather: false,
-      },
-      console.log(this.state.isShowWeather)
-    );
+    this.setState({
+      city: city,
+      country: country,
+      actualUnit: actualUnit,
+      precipitation: precipitation,
+      isShowWeather: false,
+    });
   };
   render() {
     return (
       <div class="container">
         <CogButton CogCallback={this.getSettingsFunction} />
         <Form
-          city={this.state.city} 
+          city={this.state.city}
           country={this.state.country}
           loadWeather={this.getWeather}
           error={this.state.error}
@@ -165,11 +154,9 @@ class App extends Component {
             precipitation={this.state.precipitation}
             weathericon={this.state.icon}
             isShowIcon={this.state.precipitation}
-            unitFull ={this.state.unitFull}
+            unitFull={this.state.unitFull}
           />
-        ) : (
-          console.log("err")
-        )}
+        ) : null}
       </div>
     );
   }

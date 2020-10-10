@@ -7,7 +7,6 @@ class SavePropertiesForm extends Component {
     super(props);
     this.cityInput = React.createRef();
     this.countryInput = React.createRef();
-    this.precipitationSwitch = React.createRef();
   }
   state = {
     city: "",
@@ -56,7 +55,7 @@ class SavePropertiesForm extends Component {
     const unitEmbedInUrl = event.value;
     this.setState({
       unitFull: { event },
-      unitEmbedInUrl: { unitEmbedInUrl },
+      unitEmbedInUrl: unitEmbedInUrl,
     });
   };
   render() {
@@ -88,7 +87,7 @@ class SavePropertiesForm extends Component {
         </div>
         <div className="row">
           <label> Precipitation : </label>
-          <Switch ref={this.precipitationSwitch} onClick={this.toggler} />
+          <Switch onClick={this.toggler} />
         </div>
         <div className="row">
           <Select
